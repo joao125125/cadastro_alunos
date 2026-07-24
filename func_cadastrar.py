@@ -4,12 +4,15 @@ def cadastro ():
     nome_errado = input("Digite o nome do aluno: ")
     nome = nome_errado.strip()
     
-    
-    #validação da nota
-    nota_str = input("Digite a nota do aluno: ")
-    #converçaõ de " , " para " . "
-    nota_str = nota_str.replace(",", ".")
-    nota = float(nota_str)
+    try:
+        #validação da nota
+        nota_str = input("Digite a nota do aluno: ")
+        #converçaõ de " , " para " . "
+        nota_str = nota_str.replace(",", ".")
+        nota = float(nota_str)
+    except:
+        print ("Digite apenas numeros!")
+        return
 
      
     while nota <0 or nota  >10:

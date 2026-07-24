@@ -21,12 +21,15 @@ def cadastro ():
     nome_errado = input(Fore.LIGHTWHITE_EX + "Digite o nome do aluno: ")
     nome = nome_errado.strip()
     
-    
-    #validação da nota
-    nota_str = input(Fore.LIGHTWHITE_EX + "Digite a nota do aluno: ")
-    #converçaõ de " , " para " . "
-    nota_str = nota_str.replace(",", ".")
-    nota = float(nota_str)
+    try:
+        #validação da nota
+        nota_str = input(Fore.LIGHTWHITE_EX + "Digite a nota do aluno: ")
+        #converçaõ de " , " para " . "
+        nota_str = nota_str.replace(",", ".")
+        nota = float(nota_str)
+    except:
+        print(Fore.LIGHTRED_EX + "DIGITE APENAS NUMEROS!\n")
+        return
 
      
     while nota <0 or nota  >10:
@@ -60,17 +63,19 @@ def mostrar ():
     print (Fore.LIGHTWHITE_EX + f"{'NOME':<10} {'NOTA':<10} ESTADO")
     print ("=" * 35)
 
+    try:
+        for linhas in conteudo:
+            linhas = linhas.strip()
+            partes = linhas.split(";")
+            nome = partes[0]
+            nota = float(partes[1])
+            estado = partes[2]
 
-    for linhas in conteudo:
-        linhas = linhas.strip()
-        partes = linhas.split(";")
-        nome = partes[0]
-        nota = float(partes[1])
-        estado = partes[2]
-
-        print(Fore.LIGHTWHITE_EX + f"{nome:<10} {nota:<10} {estado}")
-    print ("\n")
-    
+            print(Fore.LIGHTWHITE_EX + f"{nome:<10} {nota:<10} {estado}")
+        print ("\n")
+    except:
+        print (Fore.LIGHTRED_EX + "ERRO NA LISTAGEM!")
+        
 
 
 
@@ -80,7 +85,7 @@ def alterar ():
     with open ("dados_alunos.txt", "r", encoding="UTF-8") as arquivo:
         cont_p_alterar = arquivo.readlines() #CRIA UMA LISTA COM OS DADOS LIDOS 
 
-    nome_aluno = input(Fore.LIGHTWHITE_EX + "Digite o nome do aluno que deseja alterar a nota: \n")
+    nome_aluno = input(Fore.LIGHTWHITE_EX + "Digite o nome do aluno que deseja alterar a nota: ")
 
     existe = False #CRIA UMA VARIAVEL BOLEANA 
     cont_alterado = [] #CRIA UMA LISTA VAZIA PARA OS NOVOS DADOS
@@ -99,10 +104,14 @@ def alterar ():
 
      if nome.lower() == nome_aluno.lower():#IDENTIFICA SE O NOME DIGITADO EXISTE NOS CADASTROS
         existe = True#MUDA A VARIAVEL BOLEANA PARA VERDADEIRA 
-        print (Fore.LIGHTGREEN_EX + f"ALUNO ENCONTRADO\nNOME: {nome} | NOTA ATUAL: {nota:.2} | ESTADO ATUAL: {estado}")
-        nova_nota = input(Fore.LIGHTWHITE_EX + "Digite a nova nota: ")#PEDE UMA NOVA NOTA 
-        nova_nota = nova_nota.replace(",", ".")
-        nova_nota = float(nova_nota)
+        print (Fore.LIGHTGREEN_EX + f"\nALUNO ENCONTRADO\nNOME: {nome} | NOTA ATUAL: {nota:.2} | ESTADO ATUAL: {estado}")
+        try:
+            nova_nota = input(Fore.LIGHTWHITE_EX + "Digite a nova nota: ")#PEDE UMA NOVA NOTA 
+            nova_nota = nova_nota.replace(",", ".")
+            nova_nota = float(nova_nota)
+        except:
+            print(Fore.LIGHTRED_EX + "DIGITE APENAS NUMEROS!\n")
+            return
 
         while nova_nota <0 or nova_nota >10:#PEDE UMA NOVA NOTA CASO DIGITEM UMA NOTA MAIOR QUE 10 OU MENOR QUE 0
             print (Fore.LIGHTRED_EX + "DIGITE UMA NOTA VALIDA!")
