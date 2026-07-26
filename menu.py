@@ -2,19 +2,25 @@ from colorama import Fore, Style, init
 init ()
 def menu ():
     while True:
-        print (Fore.LIGHTBLUE_EX + "==============================\n Sistema de Cadastro \n==============================\n")
-        escolha = int(input(Fore.LIGHTCYAN_EX + "OPÇÕES\n\n1- CADASTRO\n2- LISTA DE CADASTROS\n3- ALTERAR DADOS\n4- EXCLUIR DADOS\n5- SAIR\nDigite sua escolha: "))
-        if escolha == 1:
-            cadastro()
-        if escolha == 2:
-            mostrar()
-        if escolha == 3:
-            alterar()
-        if escolha == 4:
-            excluir()
-        if escolha == 5:
-            print (Fore.BLUE + "\nFECHANDO PROGRAMA...")
-            break
+        try:
+            print (Fore.LIGHTBLUE_EX + "==============================\n Sistema de Cadastro \n==============================\n")
+            escolha = int(input(Fore.LIGHTCYAN_EX + "OPÇÕES\n\n1- CADASTRO\n2- LISTA DE CADASTROS\n3- ALTERAR DADOS\n4- EXCLUIR DADOS\n5- SAIR\nDigite sua escolha: "))
+            if escolha == 1:
+                cadastro()
+            if escolha == 2:
+                mostrar()
+            if escolha == 3:
+                alterar()
+            if escolha == 4:
+                excluir()
+            if escolha == 5:
+                print (Fore.BLUE + "\nFECHANDO PROGRAMA...")
+                break
+            else:
+             print (Fore.LIGHTRED_EX + "DIGITE APENAS NUMEROS DE 1 A 5!\n")    
+        except:
+            print (Fore.LIGHTRED_EX + "DIGITE APENAS NUMEROS DE 1 A 5!\n")
+            
 
 def cadastro ():
     print (Fore.LIGHTWHITE_EX + "\n==== CADASTRAR ALUNOS ===")
