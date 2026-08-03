@@ -1,6 +1,12 @@
 from colorama import Fore, Style, init   
 init ()
 def menu ():
+    try:
+        with open ("dados_alunos.txt", "x", encoding="UTF-8") as arquivo:
+            pass 
+    except:
+        pass
+    
     while True:
         try:
             print (Fore.LIGHTBLUE_EX + "==============================\n Sistema de Cadastro \n==============================\n")
@@ -17,7 +23,7 @@ def menu ():
                 print (Fore.BLUE + "\nFECHANDO PROGRAMA...")
                 break
             else:
-             print (Fore.LIGHTRED_EX + "DIGITE APENAS NUMEROS DE 1 A 5!\n")    
+             print (Fore.YELLOW + "!DIGITE APENAS NUMEROS DE 1 A 5!\n")    
         except:
             print (Fore.LIGHTRED_EX + "DIGITE APENAS NUMEROS DE 1 A 5!\n")
             
@@ -62,7 +68,7 @@ def mostrar ():
         conteudo = arquivo.readlines()
 
     if not conteudo:
-        print(Fore.LIGHTRED_EX + "\nNenhum aluno cadastrado!\n")
+        print(Fore.LIGHTRED_EX + "\nNENHUM ALUNO CADASTRADO!\n")
         return
     
     print (Fore.LIGHTYELLOW_EX + "\n==== LISTA DE CADASTRADOS ===\n")
@@ -90,6 +96,11 @@ def alterar ():
     print (Fore.LIGHTMAGENTA_EX + "\n=== ALTERAR NOTA ===")
     with open ("dados_alunos.txt", "r", encoding="UTF-8") as arquivo:
         cont_p_alterar = arquivo.readlines() #CRIA UMA LISTA COM OS DADOS LIDOS 
+
+    if not cont_p_alterar:
+        print(Fore.LIGHTRED_EX + "\nNENHUM ALUNO CADASTRADO!\n")
+        return
+            
 
     nome_aluno = input(Fore.LIGHTWHITE_EX + "Digite o nome do aluno que deseja alterar a nota: ")
 
@@ -146,6 +157,11 @@ def excluir ():
     print (Fore.LIGHTRED_EX + "\n=== EXCLUIR ALUNO ===")
     with open ("dados_alunos.txt", "r", encoding="UTF-8") as arquivo:
         conteudo = arquivo.readlines()
+
+    if not conteudo:
+        print(Fore.LIGHTRED_EX + "\nNENHUM ALUNO CADASTRADO!\n")
+        return
+            
 
 
     nome_excluir = input(Fore.LIGHTWHITE_EX + "DIGITE O NOME DO ALUNO QUE DESEJA EXCLUIR: \n")
